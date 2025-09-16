@@ -1,0 +1,107 @@
+html{
+  background-color: powderblue;
+  /* place-items: center; */
+}
+
+body{
+  width: 100%;
+}
+
+#app {
+  width: 100%;
+}
+
+.nav-green{
+  background-color: #237a5b;
+}
+
+.nav-green-mid{
+  background-color: #32ab80;
+}
+
+.small-font{
+  font-size: 10px;
+}
+
+.small-mid-font{
+  font-size: 12px;
+}
+
+.spacing-1{
+  letter-spacing: 1px;
+}
+
+.lora-family {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+}
+
+.bg-opaque{
+  background-image: url('/img/bgkey.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.banner{
+  color: #2b2e2d;
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/img/bsmt.jpg');
+  /* background-image: url('/img/bsmt.jpg'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-opaque{
+  background-image: url('/img/clcstoc_transparent.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-students-1{
+  background-image: url('/img/banner.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  height: 60px;
+  aspect-ratio: 2;
+  border-bottom: 3px solid #0000;
+  background: 
+    linear-gradient(90deg,#524656 50%,#0000 0)
+    -25% 100%/50% 3px repeat-x border-box;
+  position: relative;
+  animation: l3-0 .75s linear infinite;
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: auto 42.5% 0;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #CF4647;
+  animation: l3-1 .75s cubic-bezier(0,900,1,900) infinite;
+}
+@keyframes l3-0 {
+  to {background-position: -125% 100%}
+}
+@keyframes l3-1 {
+  0%,2% {bottom: 0%}
+  98%,to {bottom:.1%}
+}
