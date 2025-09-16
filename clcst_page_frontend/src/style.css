@@ -105,3 +105,5 @@ body{
   0%,2% {bottom: 0%}
   98%,to {bottom:.1%}
 }
+
+.wait {cursor: wait;}

@@ -13,6 +13,7 @@ const city = ref([])
 const barangay = ref([])
 const country = ref([])
 const registerStudent = ref(false)
+const offRegister = ref(true)
 onMounted(() => {
   // Trigger animations after page load
   document.querySelectorAll('.fade-in').forEach((el, index) => {
@@ -29,9 +30,10 @@ onMounted(() => {
     city.value = data.city
     barangay.value = data.barangay
     country.value = data.country
-
+    offRegister.value = false
 
   }).catch(error => {
+    offRegister.value = true
     console.error('Error fetching demograph data:', error);
   });
 
@@ -60,7 +62,8 @@ const holdModal = (status) => {
       </div>
 
       <div class="d-flex justify-content-center align-content-center mt-5 mb-5 gap-2 fade-in">
-        <button class="btn btn-success me-2 px-4 py-2" @click="emit('registerStudent', true), registerStudent = true" data-bs-toggle="modal" data-bs-target="#registrationModal">Register Now</button>
+        <button v-if="!offRegister" class="btn btn-success me-2 px-4 py-2" @click="emit('registerStudent', true), registerStudent = true" data-bs-toggle="modal" data-bs-target="#registrationModal">Register Now</button>
+        <button v-if="offRegister" class="btn btn-success me-2 px-4 py-2 wait" disabled>Registration Coming Soon!</button>
       </div>
     </div>
 

@@ -47,57 +47,6 @@ const barangay = computed(() => {
 });
 
 
-const sameAddress = ref(false);
-const familyMembers = ref(
-  [
-    {
-      fam_firstname: 'May',
-      fam_middlename: 'Robiato',
-      fam_lastname: 'Dianito',
-      fam_suffixname: '',
-      fam_relationship: 'Mother',
-      fam_contact: '9918592816',
-      fam_email: 'may123@gmail.com',
-      fam_guardian: 1,
-    },
-    {
-      fam_firstname: 'Vener',
-      fam_middlename: 'Guevarra',
-      fam_lastname: 'Manansala',
-      fam_suffixname: '',
-      fam_relationship: 'Father',
-      fam_contact: '9918592816',
-      fam_email: 'vener123@gmail.com',
-      fam_guardian: 0,
-    }
-  ]
-);
-
-const guardianTick = ref(0)
-
-const awardList = ref([
-  {
-    awr_desc: 'Best in Math',
-    awr_year: '2015',
-  },
-  {
-    awr_desc: 'Best in Science',
-    awr_year: '2016',
-  }
-]);
-
-const attainmentList = ref([
-  {
-    pered_school: 'CLCST',
-    pered_from: '2016',
-    pered_to: '2020',
-  },
-  {
-    pered_school: 'CLCST',
-    pered_from: '2012',
-    pered_to: '2016',
-  }
-]);
 const age = ref(0)
 const yearToday = ref(0)
 const saving = ref(false);
@@ -120,37 +69,124 @@ const filteredPermCity = ref([])
 const filteredPermBarangay = ref([])
 const filteredPermZipcode = ref([])
 
+const sameAddress = ref(false);
+const guardianTick = ref(0)
+const registrationMode = 'website'
+const emit = defineEmits(['registeringStudent'])
 
+// const personal = ref({
+//   per_firstname: 'Carl Menard',
+//   per_middlename: 'Dianito',
+//   per_lastname: 'Manansala',
+//   per_suffixname: '',
+//   per_gender: 1,
+//   per_contact: '9918592816',
+//   per_email: 'manansalacarlm@gmail.com',
+//   per_birthday: '1998-02-15',
+//   per_birth_country: 163,
+//   per_birth_province: 354,
+//   per_birth_city: 13314,
+//   per_birth_zipcode: 2000,
+//   per_civilstatus: 2,
+//   per_nationality: 76,
+
+//   per_curr_home: '393 SALAPUNGAN ST.',
+//   per_curr_region: 3,
+//   per_curr_province: 163,
+//   per_curr_city: 354,
+//   per_curr_barangay: 13314,
+//   per_curr_zipcode: 2000,
+//   per_perm_home: '393 SALAPUNGAN ST.',
+//   per_perm_region: 3,
+//   per_perm_province: 163,
+//   per_perm_city: 354,
+//   per_perm_barangay: 13314,
+//   per_perm_zipcode: 2000,
+// })
+
+// const familyMembers = ref(
+//   [
+//     {
+//       fam_firstname: 'May',
+//       fam_middlename: 'Robiato',
+//       fam_lastname: 'Dianito',
+//       fam_suffixname: '',
+//       fam_relationship: 'Mother',
+//       fam_contact: '9918592816',
+//       fam_email: 'may123@gmail.com',
+//       fam_guardian: 1,
+//     },
+//     {
+//       fam_firstname: 'Vener',
+//       fam_middlename: 'Guevarra',
+//       fam_lastname: 'Manansala',
+//       fam_suffixname: '',
+//       fam_relationship: 'Father',
+//       fam_contact: '9918592816',
+//       fam_email: 'vener123@gmail.com',
+//       fam_guardian: 0,
+//     }
+//   ]
+// );
+
+// const awardList = ref([
+//   {
+//     awr_desc: 'Best in Math',
+//     awr_year: '2015',
+//   },
+//   {
+//     awr_desc: 'Best in Science',
+//     awr_year: '2016',
+//   }
+// ]);
+
+// const attainmentList = ref([
+//   {
+//     pered_school: 'CLCST',
+//     pered_from: '2016',
+//     pered_to: '2020',
+//   },
+//   {
+//     pered_school: 'CLCST',
+//     pered_from: '2012',
+//     pered_to: '2016',
+//   }
+// ]);
 
 const personal = ref({
-  per_firstname: 'Carl Menard',
-  per_middlename: 'Dianito',
-  per_lastname: 'Manansala',
+  per_firstname: '',
+  per_middlename: '',
+  per_lastname: '',
   per_suffixname: '',
-  per_gender: 1,
-  per_contact: '9918592816',
-  per_email: 'manansalacarlm@gmail.com',
-  per_birthday: '1998-02-15',
-  per_birth_country: 163,
-  per_birth_province: 354,
-  per_birth_city: 13314,
-  per_birth_zipcode: 2000,
-  per_civilstatus: 2,
-  per_nationality: 76,
+  per_gender: '',
+  per_contact: '',
+  per_email: '',
+  per_birthday: '',
+  per_birth_country: '',
+  per_birth_province: '',
+  per_birth_city: '',
+  per_birth_zipcode: '',
+  per_civilstatus: '',
+  per_nationality: '',
 
-  per_curr_home: '393 SALAPUNGAN ST.',
-  per_curr_region: 3,
-  per_curr_province: 163,
-  per_curr_city: 354,
-  per_curr_barangay: 13314,
-  per_curr_zipcode: 2000,
-  per_perm_home: '393 SALAPUNGAN ST.',
-  per_perm_region: 3,
-  per_perm_province: 163,
-  per_perm_city: 354,
-  per_perm_barangay: 13314,
-  per_perm_zipcode: 2000,
+  per_curr_home: '',
+  per_curr_region: '',
+  per_curr_province: '',
+  per_curr_city: '',
+  per_curr_barangay: '',
+  per_curr_zipcode: '',
+  per_perm_home: '',
+  per_perm_region: '',
+  per_perm_province: '',
+  per_perm_city: '',
+  per_perm_barangay: '',
+  per_perm_zipcode: '',
 })
+
+const familyMembers = ref([]);
+const awardList = ref([]);
+const attainmentList = ref([]);
+
 
 const famMembersInfo = ref({
   fam_firstname: '',
@@ -413,7 +449,7 @@ const booter = async () => {
 }
 
 
-const registrationMode = 'website'
+
 
 onMounted(async () => {
   filteredBirthCountry.value = country.value
@@ -494,7 +530,7 @@ const registerApplicant = async () => {
 
 }
 
-const emit = defineEmits(['registeringStudent'])
+
 
 
 </script>
