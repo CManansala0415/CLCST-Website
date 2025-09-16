@@ -162,10 +162,10 @@ const personal = ref({
   per_contact: '',
   per_email: '',
   per_birthday: '',
-  per_birth_country: '',
-  per_birth_province: '',
-  per_birth_city: '',
-  per_birth_zipcode: '',
+  per_birth_country: 0,
+  per_birth_province: 0,
+  per_birth_city: 0,
+  per_birth_zipcode: 0,
   per_civilstatus: '',
   per_nationality: '',
 
@@ -468,7 +468,7 @@ onMounted(async () => {
 const registerApplicant = async () => {
   emit('registeringStudent', true)
   saving.value = true;
-  
+
   let pers = {
     ...personal.value,
     per_user: 0,
@@ -510,21 +510,36 @@ const registerApplicant = async () => {
       Swal.fire({
         title: "Registration Successful",
         text: "Thank you for registering. We will contact you soon.",
-        icon: "success"
-      }).then(() => {
-        // Optional: reload or redirect
-        location.reload();
-        // console.log(results);
+        icon: "success",
+        // showCancelButton: true,          // adds a "Cancel" button
+        confirmButtonText: "Ok, Got it", // text for confirm button
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // User clicked "Reload Page"
+          location.reload();
+        } else {
+          // User clicked "Stay Here"
+          console.log("User chose not to reload.");
+        }
       });
     })
     .catch((err) => {
       // console.error('Error during registration:', err);
       Swal.fire({
-        title: "Registration Failed",
-        text: "An error occurred during registration. Please try again later.",
-        icon: "error"
+          title: "Registration Failed",
+          text: "An error occurred during registration. Please try again later.",
+          icon: "error",
+          // showCancelButton: true,            // optional: let user cancel
+          confirmButtonText: "Reload Page",
+          // cancelButtonText: "Stay Here"
+      }).then((result) => {
+          if (result.isConfirmed) {
+              location.reload(); // reload only if user confirms
+          } else {
+              console.log("User chose not to reload.");
+          }
       });
-      location.reload();
+
     });
 
 
@@ -627,7 +642,7 @@ const registerApplicant = async () => {
           <div class="col-12 col-md-6">
             <label for="birthcountry" class="form-label">Birth Country</label>
             <select class="form-select" id="birthcountry" v-model="personal.per_birth_country"
-              @change="personal.per_birth_province = ''; personal.per_birth_city = ''" required :disabled="saving">
+              @change="personal.per_birth_province = 0; personal.per_birth_city = 0" required :disabled="saving">
               <option>- Select Here -</option>
               <option v-for="country in filteredBirthCountry" :value="country.countryID">{{ country.name }}</option>
             </select>
