@@ -488,7 +488,7 @@ const registerApplicant = async () => {
 
   let message = "";
 
-  if (Object.keys(fam).length === 0 || Object.keys(awr).length === 0) {
+  if (Object.keys(fam).length === 0) {
     message = "Please add at least one family member";
   } else if (Object.keys(att).length === 0) {
     message = "Please add at least one educational attainment";
