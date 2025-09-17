@@ -36,7 +36,7 @@ class DefaultsController extends Controller
         ->where('cv_status', '=' , 1)
         ->get();
 
-        return $demograph = [
+        $demograph = [
             'country' => $country,
             'region' => $region,
             'province' => $province,
@@ -47,6 +47,8 @@ class DefaultsController extends Controller
             'civilstatus' => $civilstatus,
             'status' => 200,
         ];
+
+        return response()->json($demograph);
 
     }
 

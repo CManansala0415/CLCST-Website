@@ -467,7 +467,7 @@ onMounted(async () => {
 
 const registerApplicant = async () => {
   emit('registeringStudent', true)
-  saving.value = true;
+  
 
   let pers = {
     ...personal.value,
@@ -504,7 +504,7 @@ const registerApplicant = async () => {
   }
 
   // If all conditions are met, proceed to add applicant
-
+  saving.value = true;
   addApplicant(data)
     .then((results) => {
       Swal.fire({
