@@ -154,6 +154,7 @@ class DefaultsController extends Controller
 
 
             return $data = [
+                'per_personid' => $perid,
                 'fam_id' => $famid,
                 'educ_id' => $awrid,
                 'att_id' => $attid,

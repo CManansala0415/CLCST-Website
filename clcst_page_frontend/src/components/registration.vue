@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { addApplicant } from '../api';
-
+import { pdfGenerator, qrImageGenerator } from '../Generators';
 const props = defineProps({
   genderData: {
   },
@@ -69,6 +69,7 @@ const filteredPermCity = ref([])
 const filteredPermBarangay = ref([])
 const filteredPermZipcode = ref([])
 
+const qrimage = ref('')
 const sameAddress = ref(false);
 const guardianTick = ref(0)
 const registrationMode = 'website'
@@ -460,92 +461,89 @@ onMounted(async () => {
   filteredPermRegion.value = region.value
 
   await booter().then((results) => {
-    console.log('Booted')
+    // pdfGenerator('Registration Form', 'a4', 'portrait', 10)
+    // qrImageGenerator('test')
   })
 
 })
 
+const printForm = (studentid, qrImageUrl) => {
+  // Dynamically create a hidden container to hold the QR for html2pdf
+  let container = document.createElement('div');
+  container.id = 'printform';
+  container.style.display = 'none';
+  container.innerHTML = `
+    <div style="width:2.125in;height:3.375in;display:flex;justify-content:center;align-items:center;border:1px solid #ddd;">
+      <img src="${qrImageUrl}" style="width:100px;height:100px;" />
+    </div>
+  `;
+  document.body.appendChild(container);
+
+  let name = 'LC-' + studentid;
+  let size = [2.125, 3.375];
+
+  pdfGenerator(name, size, 'portrait', 0.03).then(() => {
+    document.body.removeChild(container); // cleanup after download
+  });
+};
+
+
 const registerApplicant = async () => {
-  emit('registeringStudent', true)
-  
+  emit('registeringStudent', true);
 
   let pers = {
     ...personal.value,
     per_user: 0,
     per_regtype: 2
+  };
+
+  let fam = JSON.parse(JSON.stringify(familyMembers.value));
+  let awr = JSON.parse(JSON.stringify(awardList.value));
+  let att = JSON.parse(JSON.stringify(attainmentList.value));
+
+  if (!Object.keys(fam).length) {
+    return Swal.fire({ title: "Requirements", text: "Please add at least one family member", icon: "question" });
+  }
+  if (!Object.keys(att).length) {
+    return Swal.fire({ title: "Requirements", text: "Please add at least one educational attainment", icon: "question" });
   }
 
-  let fam = JSON.parse(JSON.stringify(familyMembers.value))
-  let awr = JSON.parse(JSON.stringify(awardList.value))
-  let att = JSON.parse(JSON.stringify(attainmentList.value))
-
-  let data = {
-    personal: pers,
-    family: fam,
-    awards: awr,
-    attainment: att,
-  }
-
-  let message = "";
-
-  if (Object.keys(fam).length === 0) {
-    message = "Please add at least one family member";
-  } else if (Object.keys(att).length === 0) {
-    message = "Please add at least one educational attainment";
-  }
-
-  if (message) {
-    Swal.fire({
-      title: "Requirements",
-      text: message,
-      icon: "question"
-    });
-    return;
-  }
-
-  // If all conditions are met, proceed to add applicant
   saving.value = true;
-  addApplicant(data)
-    .then((results) => {
-      Swal.fire({
-        title: "Registration Successful",
-        text: "Thank you for registering. We will contact you soon.",
-        icon: "success",
-        // showCancelButton: true,          // adds a "Cancel" button
-        confirmButtonText: "Ok, Got it", // text for confirm button
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // User clicked "Reload Page"
-          location.reload();
-        } else {
-          // User clicked "Stay Here"
-          console.log("User chose not to reload.");
-        }
-      });
-    })
-    .catch((err) => {
-      // console.error('Error during registration:', err);
-      Swal.fire({
-          title: "Registration Failed",
-          text: "An error occurred during registration. Please try again later.",
-          icon: "error",
-          // showCancelButton: true,            // optional: let user cancel
-          confirmButtonText: "Reload Page",
-          // cancelButtonText: "Stay Here"
-      }).then((result) => {
-          if (result.isConfirmed) {
-              location.reload(); // reload only if user confirms
-          } else {
-              console.log("User chose not to reload.");
-          }
-      });
 
+  try {
+    let results = await addApplicant({ personal: pers, family: fam, awards: awr, attainment: att });
+    let studentId = results?.per_personid;
+
+    if (!studentId) {
+      throw new Error("No student ID returned from server.");
+    }
+
+    let qrImageUrl = await qrImageGenerator(studentId);
+
+    Swal.fire({
+      title: "Registration Successful",
+      text: "Thank you for registering. We will contact you soon.",
+      icon: "success",
+      confirmButtonText: "Ok, Got it",
+      didOpen: () => {
+        printForm(studentId, qrImageUrl);
+      }
+    }).then(() => {
+      location.reload();
     });
 
-
-}
-
-
+  } catch (err) {
+    console.error("Registration error:", err);
+    Swal.fire({
+      title: "Registration Failed",
+      text: err.message || "An error occurred during registration. Please try again later.",
+      icon: "error",
+      confirmButtonText: "Reload Page"
+    }).then((r) => {
+      if (r.isConfirmed) location.reload();
+    });
+  }
+};
 
 
 </script>
