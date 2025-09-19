@@ -107,3 +107,14 @@ body{
 }
 
 .wait {cursor: wait;}
+
+.social-link {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  color: #1877f2; /* Facebook blue */
+  padding: 8px 14px;
+  border: 2px solid #1877f2;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}

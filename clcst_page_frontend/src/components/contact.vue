@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 
 onMounted(() => {
   const elements = document.querySelectorAll('.fade-in')
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const delay = parseFloat(entry.target.dataset.delay) || 0
@@ -17,7 +17,7 @@ onMounted(() => {
       }
     })
   }, { threshold: 0.1 })
-  
+
   elements.forEach((el, index) => {
     el.dataset.delay = (index * 0.2).toFixed(2) // staggered delay
     observer.observe(el)
@@ -42,53 +42,59 @@ onMounted(() => {
       <!-- Requirement Cards -->
       <div class="container mb-5">
         <div class="row g-4">
-          <!-- College -->
+          <!-- Junior High School Graduate -->
           <div class="col-12 col-md-4 fade-in">
-            <div class="requirement-card p-3 p-md-4 h-100 d-flex flex-column text-white border border-light border-opacity-25">
-              <h5 class="fw-bold mb-3 text-center">College</h5>
+            <div class="requirement-card glass-card p-4 h-100 d-flex flex-column">
+              <h5 class="fw-bold mb-4 text-center text-primary">
+                🎓 Junior High School Graduate
+              </h5>
               <ul class="mb-0 check-list">
-                <li><strong>Form 138</strong> Senior High School Card (Grade 12 Completer)</li>
-                <li><strong>Form 137-A</strong> Permanent Record</li>
-                <li><strong>Certification of Good Moral Character</strong></li>
-                <li><strong>Birth Certificate (PSA, Original)</strong></li>
-                <li>Two (2) 2x2 latest photo</li>
-                <li><strong>Medical Requirements</strong></li>
-                <li><strong>One (1) long brown envelope</strong></li>
+                <li>Junior High School Card (Grade 10) F-138A (Original & Photocopy)</li>
+                <li>Form 137-A Permanent Record (Original, Copy Valid to CELTECH)</li>
+                <li>NCAE Result</li>
+                <li>Learning Reference Number (LRN)</li>
+                <li>Certificate of Good Moral Character (Original)</li>
+                <li>Certificate of Junior High School Completion (Certified Photocopy)</li>
+                <li>PSA Birth Certificate (Original)</li>
+                <li>1x1 and 2x2 latest photos (1 copy each)</li>
+                <li>One (1) long brown envelope</li>
+                <li>ESC Certificate (if from Private School)</li>
               </ul>
             </div>
           </div>
 
-          <!-- Incoming SHS -->
+          <!-- Senior High School Graduate -->
           <div class="col-12 col-md-4 fade-in">
-            <div class="requirement-card p-3 p-md-4 h-100 d-flex flex-column text-white border border-light border-opacity-25">
-              <h5 class="fw-bold mb-3 text-center">Incoming SHS</h5>
+            <div class="requirement-card glass-card p-4 h-100 d-flex flex-column">
+              <h5 class="fw-bold mb-4 text-center text-success">
+                🏫 Senior High School Graduate
+              </h5>
               <ul class="mb-0 check-list">
-                <li>Original and photocopy of <strong>Form 138 (Report Card)</strong></li>
-                <li><strong>Form 137-A</strong> Permanent Record</li>
-                <li><strong>NCAE Result</strong> (if available)</li>
-                <li><strong>LRN</strong></li>
-                <li><strong>PPPP</strong></li>
-                <li><strong>ESC Certificate</strong> (for students with voucher from Private)</li>
-                <li><strong>Birth Certificate (PSA, Original)</strong></li>
-                <li><strong>Certificate of Good Moral Character</strong></li>
-                <li><strong>Certificate of Junior HS Completion</strong></li>
-                <li>1x1 & 2x2 latest photo (1 pc each)</li>
-                <li><strong>One (1) long brown envelope</strong></li>
+                <li>Senior High School Card (Grade 12) F-138A (Original)</li>
+                <li>Form 137-A Permanent Record (Original, Copy Valid to CELTECH)</li>
+                <li>Certificate of Good Moral Character (Original)</li>
+                <li>Senior High School Diploma (Certified Photocopy)</li>
+                <li>PSA Birth Certificate (Original)</li>
+                <li>Two (2) 2x2 latest photos</li>
+                <li>Medical Requirements</li>
+                <li>One (1) long brown envelope</li>
               </ul>
             </div>
           </div>
 
-          <!-- Transferee Students -->
+          <!-- Transferee -->
           <div class="col-12 col-md-4 fade-in">
-            <div class="requirement-card p-3 p-md-4 h-100 d-flex flex-column text-white border border-light border-opacity-25">
-              <h5 class="fw-bold mb-3 text-center">Transferee Students</h5>
+            <div class="requirement-card glass-card p-4 h-100 d-flex flex-column">
+              <h5 class="fw-bold mb-4 text-center text-warning">
+                🔄 Transferee
+              </h5>
               <ul class="mb-0 check-list">
-                <li><strong>Transfer Credentials (Honorable Dismissal)</strong> from last school attended</li>
-                <li><strong>Transcript of Records (TOR)</strong></li>
-                <li><strong>Birth Certificate (PSA, Original)</strong></li>
-                <li>Two (2) 2x2 latest photo</li>
-                <li><strong>Medical Requirements</strong></li>
-                <li><strong>One (1) long brown envelope</strong></li>
+                <li>Honorable Dismissal or Transfer Credentials</li>
+                <li>Copy of Grades (if TOR is not yet available)</li>
+                <li>Transcript of Records (Original)</li>
+                <li>PSA Birth Certificate (Original)</li>
+                <li>Two (2) 2x2 latest photos</li>
+                <li>Marriage Contract (if Married, Photocopy)</li>
               </ul>
             </div>
           </div>
@@ -103,14 +109,18 @@ onMounted(() => {
           </div>
           <div class="col-12 col-md-6 col-lg-4">
             <div class="fw-bold">
-              📱 0917-115-3965<br>
-              📱 0908-873-5231<br>
-              ☎️ (045) 435-1495<br>
-              ☎️ (045) 961-4447
+              📱 0933-818-5855<br>
+              📱 0917-144-0297<br>
+              ☎️ (047) 223-5855<br>
+              ☎️ (047) 224-1288
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-4">
             <div class="fw-bold">Send us a private message on our official FB page</div>
+            <a href="https://www.facebook.com/celtechsfp/" target="_blank" rel="noopener noreferrer"
+              class="social-link mt-2">
+              Visit us on Facebook
+            </a>
           </div>
         </div>
       </div>
@@ -120,20 +130,62 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Fade in/out animation */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.appear { opacity: 1; transform: translateY(0); }
-.disappear { opacity: 0; transform: translateY(20px); }
-
-/* Check-list bullets as checkmarks */
-.check-list { list-style: none; padding-left: 0; }
-.check-list li::before {
-  content: "✔";
-  color: #0f0;
-  margin-right: 8px;
+/* Fade animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* Hero styles */
+.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.disappear {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Glass Effect Requirement Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Checklist with modern checkmarks */
+.check-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.check-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ffae;
+  font-weight: bold;
+}
+
+/* Hero */
 .hero {
   background: url('/img/clcst.jpg') center center/cover no-repeat;
   min-height: 100vh;
@@ -142,39 +194,27 @@ onMounted(() => {
 }
 
 .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    /*background: rgba(0, 0, 0, 0.7);*/
-    /* dark overlay */
-    /* background: linear-gradient( rgba(20,20,20,0.5),rgba(35, 122, 91,0.7),rgba(20,20,20,0.5));  */
-    background: linear-gradient(rgba(0, 0, 0, 1), rgba(2, 46, 30, 0.7), rgba(0, 0, 0, 1));
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 1), rgba(2, 46, 30, 0.7), rgba(0, 0, 0, 1));
 }
 
 .hero .container {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
-.text-container { position: relative; z-index: 1; }
-
-.hero h2 { font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: 1px; font-size: clamp(1.5rem, 4vw, 2rem); }
-.hero-text {  font-weight: 300; font-size: clamp(0.9rem, 2.5vw, 1.2rem); line-height: 1.5; opacity: 0.9; }
-.spaced-text { font-size: clamp(0.7rem, 1.5vw, 0.85rem); letter-spacing: 0.5rem; font-family: 'Inter', sans-serif; }
-
-/* Requirement Cards */
-.requirement-card { background-color: rgba(0,0,0,0.5); }
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .hero-text, .spaced-text { width: 90% !important; }
-  .p-3, .p-4 { padding: 1.5rem !important; }
-  .check-list li { font-size: 0.85rem; }
+.hero-text {
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  line-height: 1.5;
+  opacity: 0.9;
 }
 
-@media (max-width: 576px) {
-  .check-list li { font-size: 0.8rem; }
-  .requirement-card { padding: 1.25rem 1rem; }
-  .spaced-text { letter-spacing: 0.3rem; font-size: 0.7rem; }
+.spaced-text {
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.5rem;
+  font-family: 'Inter', sans-serif;
 }
 </style>
